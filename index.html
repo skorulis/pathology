@@ -5,13 +5,11 @@ layout: default
 <div class="home">
 
   <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
+  {% for category in site.categories %}
+  	<li>
+  		<a class="post-link" href="{{ category[0] | prepend: '/category/' | append: '.html' | prepend: site.baseurl }}">{{ category[0] }}</a>
+  	</li>
+	{% endfor %}
+	</ul>
 
 </div>
