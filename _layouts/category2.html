@@ -1,0 +1,28 @@
+---
+layout: default
+---
+<h1>{{ page.category }} Category page</h1>
+
+{% unless page.content == '' %}
+  <p>{{ page.content }}</p>
+{% endunless %}
+
+
+{% for cat in site.data.nav %}
+	{% if cat.title == page.category %}
+		{% for child in cat.children %}
+			<h2>{{child.title}}</h2>
+			{% if child.children.size > 0 %}
+				<ul>
+				{% for c2 in child.children %}
+					<li>{{c2.title}}</li>
+				{% endfor %}
+				</ul>
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+{% endfor %}
+
+{% for post in site.categories.[page.category] reversed %}
+  <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+{% endfor %}
