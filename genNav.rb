@@ -23,7 +23,7 @@ def iterate(path,parent)
 				category = takeMeta(contents,"categories")
 				
 				navItem["title"] = title
-				navItem["url"] = "/" + category + "/" + title.gsub(/\//,"-").slugify + ".html"
+				navItem["url"] = "/" + category + "/" + item[11,item.length-14] + ".html"
 				
 				puts category
 				puts title

@@ -1,0 +1,18 @@
+<li>
+{% if include.item.url != nil %}
+<a href="{{ include.item.url | prepend: site.baseurl }}">
+{% endif %}
+	{{include.item.title}}
+{% if include.item.url != nil %}
+</a>
+{% endif %}
+{% if include.item.children.size > 0 %}
+<ul>
+{% for child in include.item.children %}
+	{% include navItem.html item=child %}
+{% endfor %}
+
+</ul>
+{% endif %}
+
+</li>
