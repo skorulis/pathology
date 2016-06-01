@@ -11,11 +11,15 @@ layout: default
 {% for cat in site.data.nav %}
 	{% if cat.title == page.category %}
 		{% for child in cat.children %}
+			{% if child.url %}
+			{% endif $}
 			<h2>{{child.title}}</h2>
 			{% if child.children.size > 0 %}
 				<ul>
 				{% for c2 in child.children %}
+					<a href="{{ c2.url | prepend: site.baseurl }}">
 					<li>{{c2.title}}</li>
+					</a>
 				{% endfor %}
 				</ul>
 			{% endif %}
