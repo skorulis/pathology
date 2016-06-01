@@ -1,0 +1,48 @@
+---
+layout: default
+---
+
+<script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+<div class="home">
+	
+	<script>
+  var client = algoliasearch("FQW1P6XHX4", 'e2317fd5bca17c0ba4b71e799d19dd7b');
+  var index = client.initIndex('dotpoint');
+
+  function search(term) {
+  	console.log(term)
+  	index.search(term, function searchDone(err, content) {
+    	console.log(err, content)
+    	html = ""
+    	for(i = 0; i < content.hits.length; ++i) {
+    	var r = content.hits[i];
+    	console.log(r)
+    		html += '<a href="' + r.url.substring(1) + '">';
+    		html += "<h2>" + r.title + "</h2>";
+    		html += "<p>" + r.text + "</p>";
+    		html += "</a>";
+    	}
+    	if (content.hits.length == 0) {
+    		html = "<h2> No results </h2>";
+    	}
+    	
+    	document.getElementById("results").innerHTML = html;
+    	
+  	});
+  	return false
+  }
+
+</script>
+
+<div id="tfheader">
+		<form id="tfnewsearch" onsubmit="search(this.form.elements['q'].value);" action="javascript:void(0);">
+		    <input type="text" class="tftextinput" name="q" size="21" maxlength="120">
+		    <input id="btnSearch" type="submit" value="search" class="tfbutton" onclick="search(this.form.elements['q'].value)">
+		</form>
+</div>
+
+<div id="results">
+
+</div>	
+
+</div>

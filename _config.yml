@@ -18,3 +18,14 @@ permalink: none
 
 # Build settings
 markdown: kramdown
+
+gems:
+  - algoliasearch-jekyll
+  
+algolia:
+  application_id: 'FQW1P6XHX4'
+  index_name:     'dotpoint'
+  record_css_selector: 'p,ul'
+  excluded_files:
+    - index.html
+    - thyroid.html
