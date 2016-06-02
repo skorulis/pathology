@@ -2,5 +2,5 @@
 set -e # halt script on error
 
 bundle exec jekyll build -d _site/pathology
-bundle exec ruby script/rubyGen
+bundle exec ruby script/genNav.rb
 bundle exec htmlproofer ./_site --url-ignore "#"
