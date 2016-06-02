@@ -6,6 +6,7 @@ before_script:
  - chmod +x ./script/cibuild # or do this locally and commit
  - chmod +x ./script/commitChanges
 
+before_install: openssl aes-256-cbc -K $encrypted_d1a6eaeb1bec_key -iv $encrypted_d1a6eaeb1bec_iv -in deploy_key.enc -out deploy_key -d
 
 script: ./script/cibuild
 
@@ -19,5 +20,10 @@ branches:
 env:
   global:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES=true # speeds up installation of html-proofer
+  - ENCRYPTION_LABEL: "d1a6eaeb1bec"
+  - COMMIT_AUTHOR_EMAIL: "skorulis@gmail.com"
+  
 
 sudo: false # route your build to the container-based infrastructure for a faster build
+
+ssh-keygen -t rsa -b 4096 -C "skorulis@gmail.com"
