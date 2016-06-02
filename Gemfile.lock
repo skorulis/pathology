@@ -85,6 +85,7 @@ PLATFORMS
 
 DEPENDENCIES
   algoliasearch-jekyll
+  ffi
   html-proofer
   jekyll
 
