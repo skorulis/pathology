@@ -1,7 +1,9 @@
 require 'json'
 require 'slugify'
+require 'set'
 
 @nav = Array.new
+@allCategories = Set.new
 
 def takeMeta(content,name)
 	match = content.scan(/#{name}:[\w\-\s"\/]*?\n/)[0].gsub(/"/,"").gsub(/\n/,"")
@@ -21,6 +23,7 @@ def iterate(path,parent)
 				contents = File.read(file)
 				title = takeMeta(contents,"title")
 				category = takeMeta(contents,"categories")
+				@allCategories.add(category)
 				
 				navItem["title"] = title
 				navItem["url"] = "/" + category + "/" + item[11,item.length-14] + ".html"
@@ -48,7 +51,16 @@ end
 
 iterate('./_posts',nil)
 
-puts @nav
+for c in @allCategories
+	File.open("category/#{c}.html","w") do |f|
+  	f.write("---\n")
+  	f.write("layout: category2\n")
+  	f.write("title: #{c}\n")
+  	f.write("category: #{c}\n")
+  	f.write("---\n")
+	end
+end
+
 
 File.open("_data/nav.json","w") do |f|
   f.write(JSON.pretty_generate(@nav))
