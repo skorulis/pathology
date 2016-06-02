@@ -9,7 +9,7 @@ before_script:
 
 script: ./script/cibuild
 
-after_success: ./script/travisGen
+after_success: ./script/commitChanges
   
 
 branches:
